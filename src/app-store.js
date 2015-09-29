@@ -93,4 +93,41 @@ AppStore.prototype.getModel = function(id, modelName) {
   return model && model.toJSON();
 };
 
+/**
+ * Update fields on model of particular type with particular id
+ * @param {Object}   updateObject Key-value-pairs specifying fields to update
+ * @param {String}   id           Id of the model to be updated
+ * @param {String}   modelName    Name of the type of model being updated
+ * @param {Function} callback     Callback once model has been synced with db
+ */
+AppStore.prototype.set = function(updateObject, id, modelName, callback) {
+  var model = this.modelHash[modelName].get(id);
+  var that = this;
+  model.save(updateObject, {
+    wait: true,
+    success: function(newModel) {
+      that.refresh(id, modelName, callback);
+    }
+  });
+};
+
+/**
+ * Sync a particular model with data in the database
+ * @param  {String}   id        Id of the model to be synced
+ * @param  {String}   modelName Name of the type of model getting synced
+ * @param  {Function} callback  Optional callback
+ */
+AppStore.prototype.refresh = function(id, modelName, callback) {
+  var model = this.modelHash[modelName].get(id);
+  var that = this;
+  // Sync the model with the database
+  model.fetch({
+    wait: true,
+    success: function(bbModel, modelObj) {
+      that.renderRoot();
+      callback && callback();
+    }
+  });
+};
+
 module.exports = AppStore;
