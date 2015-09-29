@@ -72,4 +72,14 @@ AppStore.prototype.resetModelHash = function(modelHash) {
   }
 };
 
+/**
+ * Re-render the root with (presumably) new model data
+ */
+AppStore.prototype.renderRoot = function() {
+  for (var model in this.modelHash) {
+    this.rootProps[model] = this.modelHash[model].toJSON();
+  }
+  this.rootNode.setProps(this.rootProps);
+};
+
 module.exports = AppStore;
