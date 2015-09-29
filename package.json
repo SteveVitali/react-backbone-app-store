@@ -1,0 +1,24 @@
+{
+  "name": "react-backbone-app-store",
+  "version": "1.0.0",
+  "description": "Lightweight data store for React applications using Backbone models/collections",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SteveVitali/react-backbone-app-store.git"
+  },
+  "keywords": [
+    "react",
+    "backbone",
+    "store"
+  ],
+  "author": "Steve Vitali <svitali@seas.upenn.edu>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SteveVitali/react-backbone-app-store/issues"
+  },
+  "homepage": "https://github.com/SteveVitali/react-backbone-app-store"
+}
