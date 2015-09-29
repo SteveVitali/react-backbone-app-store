@@ -49,6 +49,10 @@ AppStore.prototype.resetData = function(data, rootNodeType, rootParentNode) {
     appStore: this
   });
 
+  // Keeps track of ids currently in process of getting fetched
+  // so they aren't fetched twice
+  this.fetchCache = {};
+
   var rootNode = React.createElement(
     rootNodeType,
     this.rootProps,
@@ -81,6 +85,43 @@ AppStore.prototype.renderRoot = function() {
     this.rootProps[model] = this.modelHash[model].toJSON();
   }
   this.rootNode.setProps(this.rootProps);
+};
+
+/**
+ * Fetch a set of ids from the server and store their models in model hash
+ * @param  {[String]} ids       Ids of models to fetch
+ * @param  {String}   modelName The name of the type of model to fetch
+ * @param  {Function} cb        Optional callback
+ */
+AppStore.prototype.fetch = function(ids, modelName, cb) {
+  if (!_.isArray(ids) || !ids.length) {
+    return cb && cb();
+  }
+
+  var that = this;
+  var idsToFetch = [];
+  _.each(ids, function(id) {
+    // Only fetch ids not currently in the fetchCache
+    if (!that.fetchCache[id]) {
+      idsToFetch.push(id);
+      that.fetchCache[id] = true;
+    }
+  });
+
+  var numFetched = 0;
+  var numToFetch = idsToFetch.length;
+  var endpoint = '/api/' + this.ENDPOINTS[modelName] + '/';
+
+  _.each(idsToFetch, function(id) {
+    $.get(endpoint + id, function(res) {
+      that.modelHash[modelName].add(res);
+      delete that.fetchCache[id];
+      if (++numFetched === numToFetch) {
+        that.renderRoot();
+        cb && cb();
+      }
+    });
+  });
 };
 
 /**
