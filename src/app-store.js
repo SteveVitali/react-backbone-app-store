@@ -82,4 +82,15 @@ AppStore.prototype.renderRoot = function() {
   this.rootNode.setProps(this.rootProps);
 };
 
+/**
+ * Get cached model with particular id and type
+ * @param  {String} id        The id of the desired model
+ * @param  {String} modelName The name of the desired model type
+ * @return {Object}           The model object or undefined if not yet fetched
+ */
+AppStore.prototype.getModel = function(id, modelName) {
+  var model = this.modelHash[modelName].get(id);
+  return model && model.toJSON();
+};
+
 module.exports = AppStore;
