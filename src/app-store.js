@@ -32,7 +32,7 @@ AppStore.prototype.addModel = function(name, collection, endpoint) {
  * Reset the application data and re-render the top-level of the app
  * @param  {Object} data            The root props of the toplevel element
  *                                  (including app store models, such that
- *                                  data.modelName = array of model objects
+ *                                  data[modelName] = array of model objects
  * @param  {React}  rootNodeType    The toplevel React component type
  * @param  {DOM}    rootParentNode  The DOM element where the app lives
  */
