@@ -7,7 +7,7 @@ var concat = require('gulp-concat');
 // Build the version located at /dist/react-backbone-app-store.min.js
 // that can be used globally or through bower
 gulp.task('build-global', function() {
-  gulp.src('src/*.jsx')
+  gulp.src('src/*.js')
     .pipe(react())
     .pipe(replace(
       'module.exports = AppStore',
@@ -15,13 +15,15 @@ gulp.task('build-global', function() {
     ))
     .pipe(replace("var React = require('react');", ''))
     .pipe(replace("var _ = require('lodash');", ''))
+    .pipe(concat('react-backbone-app-store.js'))
+    .pipe(gulp.dest('dist'))
     .pipe(uglify())
     .pipe(concat('react-backbone-app-store.min.js'))
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/*.jsx', ['build-global']);
+  gulp.watch('src/*.js', ['build-global']);
 });
 
 gulp.task('default', ['watch']);
