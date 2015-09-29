@@ -15,6 +15,7 @@ gulp.task('build-global', function() {
     ))
     .pipe(replace("var React = require('react');", ''))
     .pipe(replace("var _ = require('lodash');", ''))
+    .pipe(replace("var $ = require('jquery')", ''))
     .pipe(concat('react-backbone-app-store.js'))
     .pipe(gulp.dest('dist'))
     .pipe(uglify())

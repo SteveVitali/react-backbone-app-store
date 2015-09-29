@@ -1,5 +1,6 @@
 var React = require('react');
 var _ = require('lodash');
+var $ = require('jquery');
 
 /**
  * Initialize an AppStore without any models
@@ -7,7 +8,7 @@ var _ = require('lodash');
 var AppStore = function() {
   this.modelHash = {};
   this.COLLECTIONS = {};
-  this.ENDPOINT_NAMES = {};
+  this.ENDPOINTS = {};
   // The root react node for the app
   this.rootNode = null;
   // Will contain the appStore (this)
