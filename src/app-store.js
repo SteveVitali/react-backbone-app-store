@@ -1,3 +1,6 @@
+var React = require('react');
+var _ = require('lodash');
+
 /**
  * Initialize an AppStore without any models
  */

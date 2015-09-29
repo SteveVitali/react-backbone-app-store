@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/SteveVitali/react-backbone-app-store/issues"
   },
-  "homepage": "https://github.com/SteveVitali/react-backbone-app-store"
+  "homepage": "https://github.com/SteveVitali/react-backbone-app-store",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "react": "^0.13.3"
+  }
 }

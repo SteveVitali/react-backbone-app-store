@@ -13,6 +13,8 @@ gulp.task('build-global', function() {
       'module.exports = AppStore',
       'window.AppStore = AppStore'
     ))
+    .pipe(replace("var React = require('react');", ''))
+    .pipe(replace("var _ = require('lodash');", ''))
     .pipe(uglify())
     .pipe(concat('react-backbone-app-store.min.js'))
     .pipe(gulp.dest('dist'));
