@@ -82,7 +82,7 @@ Re-render the root with (presumably) new model data
 Fetch a set of ids from the server and store their models in model hash
 
 ```js
-@param  {[String]} ids       Ids of models to fetch
+@param  {String[]} ids       Ids of models to fetch
 @param  {String}   modelName The name of the type of model to fetch
 @param  {Function} cb        Optional callback
 ```
