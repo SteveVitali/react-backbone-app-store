@@ -21,8 +21,8 @@ var AppStore = require('react-backbone-app-store');
 
 var app = new AppStore();
 
-app.addModel('Users', UsersCollection, '/api/users');
-app.addModel('Items', ItemsCollection, '/api/items');
+app.registerModel('Users', UsersCollection, '/api/users');
+app.registerModel('Items', ItemsCollection, '/api/items');
 // ...
 var rootProps = {
   // default props for root node

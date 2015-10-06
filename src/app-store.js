@@ -22,7 +22,7 @@ var AppStore = function() {
  * @param {Object} collection The Backbone collection for the model
  * @param {String} endpoint   The base URL for CRUD operations on this model
  */
-AppStore.prototype.addModel = function(name, collection, endpoint) {
+AppStore.prototype.registerModel = function(name, collection, endpoint) {
   this.modelHash[name] = this.modelHash[name] || {};
   this.COLLECTIONS[name] = this.COLLECTIONS[name] || collection;
   this.ENDPOINTS[name] = this.ENDPOINTS[name] || endpoint;
