@@ -14,6 +14,10 @@ var AppStore = function() {
   // Will contain the appStore (this)
   // and a ref to the root data objects
   this.rootProps = {};
+
+  // Keeps track of ids currently in process of getting fetched
+  // so they aren't fetched twice
+  this.fetchCache = {};
 };
 
 /**
@@ -23,9 +27,9 @@ var AppStore = function() {
  * @param {String} endpoint   The base URL for CRUD operations on this model
  */
 AppStore.prototype.registerModel = function(name, collection, endpoint) {
-  this.modelHash[name] = this.modelHash[name] || {};
   this.COLLECTIONS[name] = this.COLLECTIONS[name] || collection;
   this.ENDPOINTS[name] = this.ENDPOINTS[name] || endpoint;
+  this.modelHash[name] = this.modelHash[name] || new this.COLLECTIONS[name]();
 };
 
 /**
@@ -48,10 +52,6 @@ AppStore.prototype.resetData = function(data, rootNodeType, rootParentNode) {
   this.rootProps = _.extend(data, {
     appStore: this
   });
-
-  // Keeps track of ids currently in process of getting fetched
-  // so they aren't fetched twice
-  this.fetchCache = {};
 
   var rootNode = React.createElement(
     rootNodeType,

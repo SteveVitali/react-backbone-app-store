@@ -1,6 +1,6 @@
 {
   "name": "react-backbone-app-store",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Lightweight data store for React applications using Backbone models/collections",
   "main": "index.js",
   "scripts": {
