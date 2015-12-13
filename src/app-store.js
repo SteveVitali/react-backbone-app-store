@@ -110,7 +110,7 @@ AppStore.prototype.fetch = function(ids, modelName, cb) {
 
   var numFetched = 0;
   var numToFetch = idsToFetch.length;
-  var endpoint = '/api/' + this.ENDPOINTS[modelName] + '/';
+  var endpoint = this.ENDPOINTS[modelName] + '/';
 
   _.each(idsToFetch, function(id) {
     $.get(endpoint + id, function(res) {
