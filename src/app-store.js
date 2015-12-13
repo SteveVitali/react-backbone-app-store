@@ -117,7 +117,6 @@ AppStore.prototype.fetch = function(ids, modelName, cb) {
       that.modelHash[modelName].add(res);
       delete that.fetchCache[id];
       if (++numFetched === numToFetch) {
-        that.renderRoot();
         cb && cb();
       }
     });
@@ -166,7 +165,6 @@ AppStore.prototype.refresh = function(id, modelName, callback) {
   model.fetch({
     wait: true,
     success: function(bbModel, modelObj) {
-      that.renderRoot();
       callback && callback();
     }
   });
