@@ -33,6 +33,15 @@ AppStore.prototype.registerModel = function(name, collection, endpoint) {
 };
 
 /**
+ * Determine whether app store has registered a model with given name
+ * @param  {String}  modelName The name of the model in question
+ * @return {Boolean}           Whether the model has been registered
+ */
+AppStore.prototype.hasModel = function(modelName) {
+  return !!this.modelHash[name];
+};
+
+/**
  * Reset the application data and re-render the top-level of the app
  * @param  {Object} data            The root props of the toplevel element
  *                                  (including app store models, such that
@@ -124,14 +133,37 @@ AppStore.prototype.fetch = function(ids, modelName, cb) {
 };
 
 /**
+ * Add a model to the model hash without fetching from server
+ * @param {Object} modelData The model object (must include _id)
+ * @param {String} modelName The name of the model type
+ */
+AppStore.prototype.add = function(modelData, modelName) {
+  this.modelHash[modelName].add(modelData);
+};
+
+/**
  * Get cached model with particular id and type
  * @param  {String} id        The id of the desired model
  * @param  {String} modelName The name of the desired model type
  * @return {Object}           The model object or undefined if not yet fetched
  */
-AppStore.prototype.getModel = function(id, modelName) {
+AppStore.prototype.get = function(id, modelName) {
   var model = this.modelHash[modelName].get(id);
   return model && model.toJSON();
+};
+
+// For backwards compatibility
+AppStore.prototype.getModel = function(id, modelName) {
+  return this.get(id, modelName);
+};
+
+/**
+ * Get all the models in a particular collection
+ * @param  {String} modelName The name of the desired model type
+ * @return {Object[]}         An array of all the model objects
+ */
+AppStore.prototype.getAll = function(modelName) {
+  return this.modelHash[modelName].toJSON();
 };
 
 /**
