@@ -87,6 +87,7 @@ Fetch a set of ids from the server and store their models in model hash
 @param  {Function} cb        Optional callback
 ```
 
+### get(id, modelName)
 ### getModel(id, modelName)
 
 Get cached model with particular id and type
@@ -95,6 +96,24 @@ Get cached model with particular id and type
 @param  {String} id        The id of the desired model
 @param  {String} modelName The name of the desired model type
 @return {Object}           The model object or undefined if not yet fetched
+```
+
+### getAll(modelName)
+
+Get all the models in a particular collection
+
+```js
+@param  {String} modelName The name of the desired model type
+@return {Object[]}         An array of all the model objects
+```
+
+### add(modelData, modelName)
+
+Add a model to the model hash without fetching from server
+
+```js
+@param {Object} modelData The model object (must include _id)
+@param {String} modelName The name of the model type
 ```
 
 
@@ -118,4 +137,14 @@ Sync a particular model with data in the database
 @param  {String}   id        Id of the model to be synced
 @param  {String}   modelName Name of the type of model getting synced
 @param  {Function} callback  Optional callback
+```
+
+
+### hasModel(modelName)
+
+Determine whether app store has registered a model with given name
+
+```js
+@param  {String}  modelName The name of the model in question
+@return {Boolean}           Whether the model has been registered
 ```
